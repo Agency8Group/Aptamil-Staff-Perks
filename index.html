@@ -19,61 +19,140 @@
                 min-height: 100vh;
             }
 
-            .header {
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                padding: 15px 20px;
-                text-align: center;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .header h1 {
-                color: white;
-                font-size: 1.8rem;
-                font-weight: 300;
-                margin: 0;
-            }
-
-            .download-section {
-                background: rgba(255, 255, 255, 0.95);
-                margin: 20px;
+            .login-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
                 padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .login-box {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
                 text-align: center;
+            }
+
+            .login-header h1 {
+                color: #333;
+                font-size: 2rem;
+                margin-bottom: 10px;
+                font-weight: 600;
+            }
+
+            .login-header p {
+                color: #666;
+                margin-bottom: 30px;
+                font-size: 1rem;
+            }
+
+            .login-form {
+                margin-bottom: 30px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                color: #333;
+                font-weight: 500;
+                font-size: 0.9rem;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 2px solid #e1e5e9;
+                border-radius: 10px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background: white;
+            }
+
+            .form-group input:focus {
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+            .login-btn {
+                width: 100%;
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: white;
+                border: none;
+                padding: 15px;
+                border-radius: 10px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-top: 10px;
+            }
+
+            .login-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            }
+
+            .login-footer {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .login-footer button {
+                background: rgba(255, 255, 255, 0.9);
+                color: #333;
+                border: 1px solid #e1e5e9;
+                padding: 10px 15px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .login-footer button:hover {
+                background: #f8f9fa;
+                transform: translateY(-1px);
             }
 
             .download-btn {
                 background: linear-gradient(45deg, #4caf50, #45a049);
                 color: white;
                 border: none;
-                padding: 12px 30px;
-                border-radius: 25px;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
             }
 
             .download-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+                background: linear-gradient(45deg, #45a049, #4caf50);
             }
 
-            .download-info {
-                margin-top: 10px;
-                color: #666;
-                font-size: 0.9rem;
+            .info-btn {
+                background: linear-gradient(45deg, #ff9800, #f57c00);
+                color: white;
+                border: none;
+            }
+
+            .info-btn:hover {
+                background: linear-gradient(45deg, #f57c00, #ff9800);
             }
 
             .iframe-container {
                 background: white;
-                margin: 0 20px 20px 20px;
+                margin: 20px;
                 border-radius: 10px;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 overflow: hidden;
                 position: relative;
-                height: calc(100vh - 200px);
+                height: calc(100vh - 40px);
                 min-height: 500px;
             }
 
@@ -95,20 +174,55 @@
         </style>
     </head>
     <body>
-        <div class="header">
-            <h1>접수 양식</h1>
-        </div>
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <h1>🔐 접수 시스템</h1>
+                    <p>회사 정보를 입력하여 로그인하세요</p>
+                </div>
 
-        <div class="download-section">
-            <button class="download-btn" onclick="downloadExcel()">
-                📥 엑셀 양식 다운로드
-            </button>
-            <div class="download-info">
-                접수 전에 엑셀 양식을 다운로드하여 미리 작성하세요
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="company">회사명</label>
+                        <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            required
+                            placeholder="회사명을 입력하세요"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            placeholder="비밀번호를 입력하세요"
+                        />
+                    </div>
+
+                    <button type="submit" class="login-btn">로그인</button>
+                </form>
+
+                <div class="login-footer">
+                    <button class="info-btn" onclick="showInfo()">
+                        ℹ️ 사용법 안내
+                    </button>
+                    <button class="download-btn" onclick="downloadExcel()">
+                        📥 엑셀 양식 다운로드
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="iframe-container">
+        <div
+            class="iframe-container"
+            id="iframeContainer"
+            style="display: none"
+        >
             <div class="loading" id="loading">로딩 중...</div>
             <iframe
                 src="https://script.google.com/macros/s/AKfycbz3TC4ONiL9XJ_bCxO8fxab9xFQw_H0q2fgEQK5WAHmkBL3yezypWtQLtSu0Ua2vVFT/exec"
@@ -120,6 +234,18 @@
         </div>
 
         <script>
+            // 인증 시스템
+            const BROWSER_CREDENTIALS = {
+                company: "123456",
+                TestCompany: "test123456",
+                MarketingCorp: "marketing2024",
+            };
+
+            function browserAuth(company, password) {
+                return BROWSER_CREDENTIALS[company] === password;
+            }
+
+            // 기존 함수들
             function hideLoading() {
                 document.getElementById("loading").style.display = "none";
             }
@@ -140,11 +266,81 @@
                 document.body.removeChild(link);
             }
 
-            // iframe 로딩 상태 모니터링
+            function handleLogin(event) {
+                event.preventDefault();
+
+                const company = document.getElementById("company").value;
+                const password = document.getElementById("password").value;
+
+                // 입력값 검증
+                if (company.trim() === "" || password.trim() === "") {
+                    alert("회사명과 비밀번호를 모두 입력해주세요.");
+                    return;
+                }
+
+                // 비밀번호 길이 검증
+                if (password.length < 6) {
+                    alert("비밀번호는 최소 6자 이상이어야 합니다.");
+                    return;
+                }
+
+                // 인증 검증
+                if (browserAuth(company, password)) {
+                    // 로그인 성공 시 iframe 표시
+                    document.querySelector(".login-container").style.display =
+                        "none";
+                    document.getElementById("iframeContainer").style.display =
+                        "block";
+
+                    console.log("로그인 성공:", company);
+                } else {
+                    alert("회사명 또는 비밀번호가 올바르지 않습니다.");
+                    console.log("로그인 실패:", company);
+                }
+            }
+
+            function showInfo() {
+                // 설명 기능 - 간단한 알림으로 대체
+                alert(
+                    "접수 시스템 사용법:\n\n1. 회사명과 비밀번호를 입력하여 로그인하세요\n2. 엑셀 양식을 다운로드하여 미리 작성하세요\n3. 로그인 후 접수 양식을 작성하세요\n4. 제출 후 확인 메시지를 기다리세요"
+                );
+                // 향후 모달이나 팝업으로 더 자세한 설명을 구현할 수 있습니다
+            }
+
+            function resetSession() {
+                // 세션스토리지 초기화
+                sessionStorage.removeItem("loggedInCompany");
+                sessionStorage.removeItem("loginTime");
+
+                // 로그인 화면으로 돌아가기
+                document.querySelector(".login-container").style.display =
+                    "flex";
+                document.getElementById("iframeContainer").style.display =
+                    "none";
+
+                // 입력 필드 초기화
+                document.getElementById("company").value = "";
+                document.getElementById("password").value = "";
+
+                alert("세션이 초기화되었습니다. 다시 로그인해주세요.");
+            }
+
+            // 페이지 로드 시 항상 로그인 화면 표시
             window.addEventListener("load", function () {
+                // 세션스토리지 초기화 (매번 새로 로그인하도록)
+                sessionStorage.removeItem("loggedInCompany");
+                sessionStorage.removeItem("loginTime");
+
+                // 항상 로그인 화면 표시
+                document.querySelector(".login-container").style.display =
+                    "flex";
+                document.getElementById("iframeContainer").style.display =
+                    "none";
+
+                // iframe 로딩 상태 모니터링
                 setTimeout(function () {
                     const loading = document.getElementById("loading");
-                    if (loading.style.display !== "none") {
+                    if (loading && loading.style.display !== "none") {
                         loading.innerHTML = "로딩이 지연되고 있습니다...";
                     }
                 }, 5000);
