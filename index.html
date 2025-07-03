@@ -34,7 +34,7 @@
         <!-- 추가 메타 정보 -->
         <meta
             name="description"
-            content="EIBE (아이베) 임직원을 위한 접수 시스템입니다. 부여 받은 계정 정보를 입력하여 로그인하세요."
+            content="EIBE (아이베) 임직원을 위한 접수 시스템입니다. 회사 정보를 입력하여 로그인하세요."
         />
         <meta
             name="keywords"
@@ -178,20 +178,56 @@
                 background: linear-gradient(45deg, #4caf50, #45a049);
                 color: white;
                 border: none;
+                position: relative;
+                overflow: hidden;
             }
 
             .download-btn:hover {
                 background: linear-gradient(45deg, #45a049, #4caf50);
+                transform: translateY(-2px);
             }
 
             .info-btn {
                 background: linear-gradient(45deg, #ff9800, #f57c00);
                 color: white;
                 border: none;
+                position: relative;
+                overflow: hidden;
             }
 
             .info-btn:hover {
                 background: linear-gradient(45deg, #f57c00, #ff9800);
+                transform: translateY(-2px);
+            }
+
+            /* 다운로드 버튼 텍스트 글로우 */
+            .download-btn {
+                animation: downloadTextGlow 2s ease-in-out infinite alternate;
+            }
+
+            @keyframes downloadTextGlow {
+                0% {
+                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+                }
+                100% {
+                    text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                        0 0 30px rgba(255, 255, 255, 0.6);
+                }
+            }
+
+            /* 정보 버튼 텍스트 글로우 */
+            .info-btn {
+                animation: infoTextGlow 2s ease-in-out infinite alternate;
+            }
+
+            @keyframes infoTextGlow {
+                0% {
+                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+                }
+                100% {
+                    text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                        0 0 30px rgba(255, 255, 255, 0.6);
+                }
             }
 
             .iframe-container {
@@ -227,18 +263,18 @@
             <div class="login-box">
                 <div class="login-header">
                     <h1>🔐 접수 시스템</h1>
-                    <p>부여 받은 계정 정보를 입력하여 로그인하세요.</p>
+                    <p>회사 정보를 입력하여 로그인하세요</p>
                 </div>
 
                 <form class="login-form" onsubmit="handleLogin(event)">
                     <div class="form-group">
-                        <label for="company">계정</label>
+                        <label for="company">회사명</label>
                         <input
                             type="text"
                             id="company"
                             name="company"
                             required
-                            placeholder="id를 입력하세요"
+                            placeholder="회사명을 입력하세요"
                         />
                     </div>
 
@@ -261,7 +297,7 @@
                         ℹ️ 사용법 안내
                     </button>
                     <button class="download-btn" onclick="downloadExcel()">
-                        📥 엑셀 양식 다운로드
+                        <strong>📥 엑셀 양식 다운로드</strong>
                     </button>
                 </div>
             </div>
@@ -324,7 +360,7 @@
 
                 // 입력값 검증
                 if (company.trim() === "" || password.trim() === "") {
-                    alert("id와와 비밀번호를 모두 입력해주세요.");
+                    alert("회사명과 비밀번호를 모두 입력해주세요.");
                     return;
                 }
 
@@ -352,7 +388,7 @@
             function showInfo() {
                 // 설명 기능 - 간단한 알림으로 대체
                 alert(
-                    "접수 시스템 사용법:\n\n1. id와 비밀번호를 입력하여 로그인하세요\n2. 엑셀 양식을 다운로드하여 미리 작성하세요\n3. 로그인 후 접수 양식을 작성하세요\n4. 제출 후 확인 메시지를 기다리세요"
+                    "접수 시스템 사용법:\n\n1. 회사명과 비밀번호를 입력하여 로그인하세요\n2. 엑셀 양식을 다운로드하여 미리 작성하세요\n3. 로그인 후 사전에 작성한 양식을 업로드 하세요\n4. 제출 후 확인 메시지를 기다리세요"
                 );
                 // 향후 모달이나 팝업으로 더 자세한 설명을 구현할 수 있습니다
             }
